@@ -1,0 +1,58 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: en
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "settings"
+    label: "⚙️ Site Settings"
+    files:
+      - label: "General Settings"
+        name: "general"
+        file: "content/settings.json"
+        fields:
+          - {label: "Hero Title", name: "hero_title", widget: "string"}
+          - {label: "Hero Subtitle", name: "hero_subtitle", widget: "string"}
+          - {label: "Hero Badge Text", name: "hero_badge", widget: "string"}
+          - {label: "Banner Headline", name: "banner_title", widget: "string"}
+          - {label: "Banner Subtitle", name: "banner_subtitle", widget: "string"}
+          - {label: "Banner Button Text", name: "banner_btn", widget: "string"}
+
+  - name: "jobs"
+    label: "💼 Job Listings"
+    folder: "content/jobs"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} @ {{company}}"
+    fields:
+      - {label: "Job Title", name: "title", widget: "string"}
+      - {label: "Company", name: "company", widget: "string"}
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Design", "AI", "Marketing", "Tech", "Content", "Product", "Video"]
+      - label: "Job Type"
+        name: "type"
+        widget: "select"
+        options: ["Full-time", "Part-time", "Contract", "Freelance"]
+      - label: "Location"
+        name: "location"
+        widget: "select"
+        options: ["Remote", "Hybrid", "On-site"]
+      - label: "Experience Level"
+        name: "experience"
+        widget: "select"
+        options: ["Junior", "Mid", "Senior", "Lead"]
+      - {label: "Salary Range", name: "salary", widget: "string"}
+      - {label: "Emoji Icon", name: "emoji", widget: "string", default: "💼"}
+      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Job Description", name: "description", widget: "text"}
+      - {label: "Requirements", name: "requirements", widget: "list"}
+      - {label: "Benefits", name: "benefits", widget: "list"}
+      - {label: "Featured?", name: "is_featured", widget: "boolean", default: false}
+      - {label: "Mark as New?", name: "is_new", widget: "boolean", default: true}
+      - {label: "Active?", name: "active", widget: "boolean", default: true}
+      - {label: "Applicants Count", name: "applicants", widget: "number", default: 0}
