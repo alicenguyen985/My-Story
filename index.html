@@ -504,202 +504,67 @@ footer { border-top: 1px solid var(--border); }
   .footer-grid { grid-template-columns: 1fr; gap: 24px; }
 }
 
-/* ═══════════════════════════════════════════════════════
-   PREMIUM ANIMATIONS
-═══════════════════════════════════════════════════════ */
-
+/* ── ANIMATIONS ──────────────────────────────────────────── */
 /* Custom cursor */
-.cursor {
-  position: fixed; top: 0; left: 0; z-index: 9999;
-  pointer-events: none; mix-blend-mode: difference;
-}
-.cursor-dot {
-  width: 8px; height: 8px; background: #fe3b01;
-  border-radius: 50%;
-  position: absolute; transform: translate(-50%,-50%);
-  transition: width 0.2s, height 0.2s, opacity 0.2s;
-}
-.cursor-ring {
-  width: 36px; height: 36px;
-  border: 1.5px solid rgba(254,59,1,0.6);
-  border-radius: 50%;
-  position: absolute; transform: translate(-50%,-50%);
-  transition: width 0.35s cubic-bezier(.25,.46,.45,.94),
-              height 0.35s cubic-bezier(.25,.46,.45,.94),
-              border-color 0.3s;
-}
-.cursor-ring.hovered {
-  width: 60px; height: 60px;
-  border-color: rgba(254,59,1,0.9);
-}
-.cursor-ring.clicking { width: 24px; height: 24px; }
+.cursor { position:fixed;top:0;left:0;z-index:9999;pointer-events:none; }
+.cursor-dot { width:8px;height:8px;background:#fe3b01;border-radius:50%;position:absolute;transform:translate(-50%,-50%);transition:width .2s,height .2s; }
+.cursor-ring { width:36px;height:36px;border:1.5px solid rgba(254,59,1,0.5);border-radius:50%;position:absolute;transform:translate(-50%,-50%);transition:width .35s cubic-bezier(.25,.46,.45,.94),height .35s,border-color .3s; }
+.cursor-ring.hovered { width:58px;height:58px;border-color:rgba(254,59,1,0.9); }
+.cursor-ring.clicking { width:22px;height:22px; }
 
-/* Reveal animation base */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s cubic-bezier(.25,.46,.45,.94),
-              transform 0.8s cubic-bezier(.25,.46,.45,.94);
-}
-[data-reveal].revealed {
-  opacity: 1; transform: none;
-}
-[data-reveal="left"] { transform: translateX(-40px); }
-[data-reveal="left"].revealed { transform: none; }
-[data-reveal="right"] { transform: translateX(40px); }
-[data-reveal="right"].revealed { transform: none; }
-[data-reveal="scale"] { transform: scale(0.92); }
-[data-reveal="scale"].revealed { transform: none; }
+/* Scroll reveal */
+[data-reveal] { opacity:0;transform:translateY(36px);transition:opacity .75s cubic-bezier(.25,.46,.45,.94),transform .75s cubic-bezier(.25,.46,.45,.94); }
+[data-reveal="left"] { transform:translateX(-36px); }
+[data-reveal="right"] { transform:translateX(36px); }
+[data-reveal="scale"] { transform:scale(0.93);opacity:0; }
+[data-reveal].in { opacity:1;transform:none; }
 
-/* Stagger children */
-[data-stagger] > * {
-  opacity: 0; transform: translateY(30px);
-  transition: opacity 0.6s cubic-bezier(.25,.46,.45,.94),
-              transform 0.6s cubic-bezier(.25,.46,.45,.94);
-}
-[data-stagger].revealed > *:nth-child(1) { transition-delay: 0s; }
-[data-stagger].revealed > *:nth-child(2) { transition-delay: 0.08s; }
-[data-stagger].revealed > *:nth-child(3) { transition-delay: 0.16s; }
-[data-stagger].revealed > *:nth-child(4) { transition-delay: 0.24s; }
-[data-stagger].revealed > *:nth-child(5) { transition-delay: 0.32s; }
-[data-stagger].revealed > *:nth-child(6) { transition-delay: 0.40s; }
-[data-stagger].revealed > *:nth-child(7) { transition-delay: 0.48s; }
-[data-stagger].revealed > *:nth-child(8) { transition-delay: 0.56s; }
-[data-stagger].revealed > * { opacity: 1; transform: none; }
+/* Stagger */
+[data-stagger]>* { opacity:0;transform:translateY(24px);transition:opacity .55s cubic-bezier(.25,.46,.45,.94),transform .55s cubic-bezier(.25,.46,.45,.94); }
+[data-stagger].in>*:nth-child(1){transition-delay:0s}
+[data-stagger].in>*:nth-child(2){transition-delay:.07s}
+[data-stagger].in>*:nth-child(3){transition-delay:.14s}
+[data-stagger].in>*:nth-child(4){transition-delay:.21s}
+[data-stagger].in>*:nth-child(5){transition-delay:.28s}
+[data-stagger].in>*:nth-child(6){transition-delay:.35s}
+[data-stagger].in>*:nth-child(7){transition-delay:.42s}
+[data-stagger].in>*:nth-child(8){transition-delay:.49s}
+[data-stagger].in>* { opacity:1;transform:none; }
 
-/* Hero text split */
-.hero-word {
-  display: inline-block;
-  overflow: hidden;
-}
-.hero-word-inner {
-  display: inline-block;
-  transform: translateY(110%);
-  transition: transform 0.9s cubic-bezier(.76,0,.24,1);
-}
-.hero-word-inner.revealed { transform: none; }
+/* Hero word split */
+.hw { display:inline-block;overflow:hidden;vertical-align:bottom; }
+.hwi { display:inline-block;transform:translateY(105%);transition:transform .85s cubic-bezier(.76,0,.24,1); }
+.hwi.in { transform:none; }
 
-/* Magnetic button */
-.magnetic { transition: transform 0.3s cubic-bezier(.25,.46,.45,.94); }
-
-/* Smooth counter */
-.counter { display: inline-block; }
+/* Magnetic */
+.btn-primary,.btn-white { transition:transform .3s cubic-bezier(.25,.46,.45,.94),background .2s,box-shadow .2s !important; }
 
 /* Card tilt */
-.job-card {
-  transform-style: preserve-3d;
-  will-change: transform;
-}
+.job-card { will-change:transform; }
 
-/* Glitch line on nav scroll */
-nav.scrolled {
-  box-shadow: 0 1px 0 rgba(254,59,1,0.2);
-}
+/* Nav scroll */
+nav.scrolled { box-shadow:0 1px 0 rgba(254,59,1,0.15); }
 
-/* Page loader */
-.page-loader {
-  position: fixed; inset: 0; z-index: 10000;
-  background: var(--bg);
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 20px;
-}
-.loader-logo {
-  font-family: var(--font); font-size: 28px; font-weight: 900;
-  color: var(--text);
-  animation: loaderPulse 1s ease infinite;
-}
-.loader-bar-wrap {
-  width: 200px; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden;
-}
-.loader-bar {
-  height: 100%; background: var(--accent); border-radius: 2px;
-  animation: loaderFill 1.2s cubic-bezier(.25,.46,.45,.94) forwards;
-}
-@keyframes loaderFill {
-  from { width: 0%; }
-  to { width: 100%; }
-}
-@keyframes loaderPulse {
-  0%,100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-.page-loader.hidden {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-}
+/* Underline nav */
+.nav-links a { position:relative; }
+.nav-links a::after { content:'';position:absolute;bottom:2px;left:14px;right:14px;height:1.5px;background:var(--accent);transform:scaleX(0);transform-origin:right;transition:transform .3s cubic-bezier(.25,.46,.45,.94); }
+.nav-links a:hover::after,.nav-links a.active::after { transform:scaleX(1);transform-origin:left; }
 
-/* Floating shapes background */
-.bg-shapes {
-  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
-}
-.bg-shape {
-  position: absolute; border-radius: 50%;
-  background: radial-gradient(circle, rgba(254,59,1,0.08) 0%, transparent 70%);
-  animation: floatShape linear infinite;
-}
-@keyframes floatShape {
-  0% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-30px) scale(1.05); }
-  100% { transform: translateY(0) scale(1); }
-}
+/* Featured shimmer */
+.job-card.featured::after { content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.04),transparent);animation:shimmer 3s ease infinite;pointer-events:none; }
+@keyframes shimmer { 0%{left:-100%} 100%{left:200%} }
 
-/* Smooth scrollbar feel */
-html { scroll-behavior: smooth; }
+/* Stat hover */
+.stat { cursor:default; }
+.stat:hover .stat-num { color:var(--accent); }
+.stat-num { transition:color .3s; }
 
-/* Hover line on nav links */
-.nav-links a {
-  position: relative;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute; bottom: 2px; left: 14px; right: 14px;
-  height: 1.5px; background: var(--accent);
-  transform: scaleX(0); transform-origin: right;
-  transition: transform 0.3s cubic-bezier(.25,.46,.45,.94);
-}
-.nav-links a:hover::after,
-.nav-links a.active::after {
-  transform: scaleX(1); transform-origin: left;
-}
-
-/* Shimmer on featured card */
-.job-card.featured::after {
-  content: '';
-  position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
-  animation: shimmer 3s ease infinite;
-  pointer-events: none;
-}
-@keyframes shimmer {
-  0% { left: -100%; }
-  100% { left: 200%; }
-}
-
-/* Stats number glow on count */
-.stat-num { transition: color 0.3s; }
-.stat:hover .stat-num { color: var(--accent); }
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 </style>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-
-<!-- Page Loader -->
-<div class="page-loader" id="pageLoader">
-  <div class="loader-logo">Stranor Lab</div>
-  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-</div>
-
-<!-- Custom Cursor -->
-<div class="cursor">
-  <div class="cursor-dot" id="cursorDot"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-</div>
+<div class="cursor"><div class="cursor-dot" id="cDot"></div><div class="cursor-ring" id="cRing"></div></div>
 
 <!-- NAVBAR -->
 <nav>
@@ -726,30 +591,17 @@ html { scroll-behavior: smooth; }
 <!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
-  <div class="bg-shapes">
-    <div class="bg-shape" style="width:500px;height:500px;left:60%;top:-100px;animation-duration:8s;animation-delay:0s;"></div>
-    <div class="bg-shape" style="width:300px;height:300px;left:5%;top:50px;animation-duration:11s;animation-delay:2s;"></div>
-    <div class="bg-shape" style="width:200px;height:200px;left:40%;top:60%;animation-duration:9s;animation-delay:1s;"></div>
-  </div>
-  <div class="hero-badge" style="opacity:0"><span>New</span> 217 roles added this week</div>
-  <h1>
-  <span class="hero-word"><span class="hero-word-inner">Find</span></span>
-  <span class="hero-word"><em><span class="hero-word-inner">creative</span></em></span>
-  <span class="hero-word"><em><span class="hero-word-inner">&amp;</span></em></span>
-  <span class="hero-word"><em><span class="hero-word-inner">tech</span></em></span><br>
-  <span class="hero-word"><span class="hero-word-inner">roles</span></span>
-  <span class="hero-word"><span class="hero-word-inner">that</span></span>
-  <span class="hero-word"><span class="hero-word-inner">matter</span></span>
-</h1>
-  <p class="hero-sub" style="opacity:0">Stranor Lab connects talented designers, marketers, and AI specialists with world-class companies — fully remote and global.</p>
-  <div class="search-wrap" style="opacity:0">
+  <div class="hero-badge"><span>New</span> 217 roles added this week</div>
+  <h1><span class="hw"><span class="hwi">Find</span></span> <em><span class="hw"><span class="hwi">creative</span></span> <span class="hw"><span class="hwi">&amp; tech</span></span></em><br><span class="hw"><span class="hwi">roles that matter</span></span></h1>
+  <p class="hero-sub">Stranor Lab connects talented designers, marketers, and AI specialists with world-class companies — fully remote and global.</p>
+  <div class="search-wrap">
     <div class="search-bar">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <input type="text" id="searchInput" placeholder="Job title, skill, or company…" oninput="filterJobs()" />
       <button class="btn btn-primary" style="padding:8px 20px;font-size:13px;">Search</button>
     </div>
   </div>
-  <div class="hero-stats" style="opacity:0">
+  <div class="hero-stats">
     <div class="stat"><div class="stat-num">2,400+</div><div class="stat-label">Open Positions</div></div>
     <div class="stat"><div class="stat-num">840</div><div class="stat-label">Companies</div></div>
     <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Placement Rate</div></div>
@@ -917,59 +769,60 @@ html { scroll-behavior: smooth; }
 const SUPABASE_URL = 'https://wrvrznwvoirbmlrufsry.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_IQ05yMg9ox4ZHZMg-pHpbg_EiWzWLLo';
 
+// ── Supabase fetch with fallback ──────────────────────────
 async function fetchJobs() {
   try {
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/jobs?select=*&active=eq.true&order=posted_at.desc`,
-      { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } }
+      SUPABASE_URL + '/rest/v1/jobs?select=*&active=eq.true&order=posted_at.desc',
+      { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json' } }
     );
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
+    if (!Array.isArray(data) || data.length === 0) throw new Error('empty');
     return data.map(j => ({
-      id: j.id, featured: j.is_featured, isNew: j.is_new,
-      emoji: j.emoji||'💼', title: j.title, company: j.company,
-      category: j.category, type: j.type, location: j.location,
-      experience: j.experience, salary: j.salary,
-      tags: j.tags||[], posted: formatPosted(j.posted_at),
-      applicants: j.applicants||0, desc: j.description||'',
-      reqs: j.requirements||[], benefits: j.benefits||[],
+      id:j.id, featured:j.is_featured, isNew:j.is_new,
+      emoji:j.emoji||'💼', title:j.title, company:j.company,
+      category:j.category, type:j.type, location:j.location,
+      experience:j.experience, salary:j.salary, tags:j.tags||[],
+      posted:fmtDate(j.posted_at), applicants:j.applicants||0,
+      desc:j.description||'', reqs:j.requirements||[], benefits:j.benefits||[]
     }));
-  } catch(e) { console.error(e); return []; }
+  } catch(e) {
+    console.warn('Supabase fallback:', e.message);
+    return FALLBACK_JOBS;
+  }
 }
 
-function formatPosted(d) {
+function fmtDate(d) {
   if (!d) return '';
   const diff = Math.floor((Date.now()-new Date(d))/86400000);
   return diff===0?'Today':diff===1?'1d ago':diff+'d ago';
 }
 
 function showLoading() {
-  document.getElementById('jobGrid').innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--text-3);font-family:var(--font)"><div style="font-size:32px;margin-bottom:12px;animation:spin 1s linear infinite;display:inline-block">◌</div><div style="font-size:14px;margin-top:8px">Loading jobs…</div></div>`;
+  document.getElementById('jobGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--text-3);font-family:var(--font)"><div style="font-size:28px;display:inline-block;animation:spin 1s linear infinite">◌</div><div style="margin-top:12px;font-size:14px">Loading jobs…</div></div>';
 }
 
-let ALL_JOBS = [];
-const JOBS = [
-  {id:1,featured:true,isNew:true,emoji:'🎨',title:'Senior Brand Designer',company:'Notion',category:'Design',type:'Full-time',location:'Remote',experience:'Senior',salary:'$110K – $140K',salaryNum:125,tags:['Brand Identity','Figma','Motion','Design Systems'],posted:'2d ago',applicants:48,desc:"Lead Notion's brand evolution across product and marketing. You'll own the visual identity system, collaborate with product designers, and shape how 30M+ users experience the Notion brand.",reqs:['5+ years brand/visual design','Strong portfolio of identity systems','Expert in Figma & Illustrator','Experience with motion design a plus'],benefits:['$110K–$140K salary','$1,500 home office stipend','Unlimited PTO','Full remote flexibility','Equity package']},
-  {id:2,featured:false,isNew:true,emoji:'🤖',title:'AI/ML Product Designer',company:'Anthropic',category:'AI',type:'Full-time',location:'Hybrid',experience:'Senior',salary:'$150K – $190K',salaryNum:170,tags:['AI UX','Prototyping','Research','LLM interfaces'],posted:'1d ago',applicants:124,desc:'Shape the future of human-AI interaction at Anthropic. Design intuitive interfaces that make powerful AI accessible and safe for everyone.',reqs:['Experience designing AI/ML products','Strong systems thinking','User research skills','Portfolio demonstrating complex UX problem-solving'],benefits:['$150K–$190K salary','Top-tier health coverage','Annual learning budget $3K','Flexible hybrid schedule']},
-  {id:3,featured:false,isNew:false,emoji:'📣',title:'Head of Growth Marketing',company:'Linear',category:'Marketing',type:'Full-time',location:'Remote',experience:'Lead',salary:'$130K – $160K',salaryNum:145,tags:['B2B SaaS','Demand Gen','PLG','Analytics'],posted:'4d ago',applicants:62,desc:"Own Linear's growth strategy from top-of-funnel to activation. Drive the marketing engine that has already scaled us to 10,000+ engineering teams.",reqs:['7+ years B2B growth/marketing','Experience with PLG motions','Data-driven decision making','Strong writing and communication'],benefits:['$130K–$160K salary','Async-first culture','Remote forever','Annual team retreats']},
-  {id:4,featured:false,isNew:false,emoji:'💻',title:'Frontend Engineer (React)',company:'Vercel',category:'Tech',type:'Full-time',location:'Remote',experience:'Mid',salary:'$120K – $155K',salaryNum:137,tags:['React','TypeScript','Next.js','CSS'],posted:'3d ago',applicants:201,desc:"Build the developer experience layer that powers millions of web deployments. You'll work on Vercel's dashboard, CLI, and the interfaces that ship code faster.",reqs:['3+ years React/TypeScript','Strong eye for UI detail','Experience with performance optimization','Open source contributions a plus'],benefits:['$120K–$155K salary','Remote-first','Developer hardware budget','Equity']},
-  {id:5,featured:false,isNew:true,emoji:'✍️',title:'Content Strategist',company:'Figma',category:'Content',type:'Full-time',location:'Remote',experience:'Mid',salary:'$90K – $115K',salaryNum:102,tags:['Content Strategy','SEO','Brand Voice','UX Writing'],posted:'1d ago',applicants:37,desc:"Define and scale Figma's content voice across blog, product documentation, and social. Work closely with design and product teams.",reqs:['4+ years content strategy or UX writing','Excellent portfolio','SEO knowledge','Tech/design industry experience preferred'],benefits:['$90K–$115K salary','Full benefits package','Remote work','Learning & development budget']},
-  {id:6,featured:false,isNew:false,emoji:'📦',title:'Product Manager, AI Features',company:'Loom',category:'Product',type:'Full-time',location:'Remote',experience:'Mid',salary:'$115K – $145K',salaryNum:130,tags:['AI Product','Video','Growth','Roadmap'],posted:'5d ago',applicants:89,desc:"Lead the AI features roadmap at Loom — from AI-generated summaries to smart search and beyond. You'll define what AI means for async communication.",reqs:['3+ years product management','Experience shipping AI features','Strong user empathy','Data analysis skills'],benefits:['$115K–$145K salary','Generous equity','Remote-first','Health & wellness stipend']},
-  {id:7,featured:false,isNew:false,emoji:'🎬',title:'Motion Designer',company:'Stripe',category:'Video',type:'Contract',location:'Remote',experience:'Mid',salary:'$80/hr',salaryNum:160,tags:['After Effects','Motion Graphics','Brand','3D'],posted:'6d ago',applicants:54,desc:"Create world-class motion design for Stripe's marketing campaigns, product launches, and brand activations that reach millions of developers worldwide.",reqs:['4+ years motion design','Expert in After Effects','3D experience (Cinema4D or Blender)',"Strong Stripe brand sensibility"],benefits:['$80/hr contract rate','Remote','Long-term engagement opportunity','Flexible schedule']},
-  {id:8,featured:false,isNew:true,emoji:'🎨',title:'UX Designer — Mobile',company:'Spotify',category:'Design',type:'Full-time',location:'Hybrid',experience:'Mid',salary:'$105K – $130K',salaryNum:117,tags:['Mobile UX','iOS','Android','User Research'],posted:'2d ago',applicants:143,desc:'Design the listening experience for 600M+ Spotify users on mobile. Own key product surfaces and conduct user research to inform design decisions.',reqs:['3+ years mobile UX design','iOS & Android design patterns','Experience running user research','Strong Figma skills'],benefits:['$105K–$130K salary','Music & podcast perks','Hybrid NYC or Stockholm','Excellent benefits']},
-  {id:9,featured:false,isNew:false,emoji:'🤖',title:'Prompt Engineer / LLM Specialist',company:'Runway',category:'AI',type:'Full-time',location:'Remote',experience:'Mid',salary:'$100K – $130K',salaryNum:115,tags:['Prompt Engineering','Python','LLMs','Evaluation'],posted:'7d ago',applicants:76,desc:"Design and optimize prompts that power Runway's generative AI models. Work at the intersection of creative and technical.",reqs:['Strong prompt engineering portfolio','Python scripting','Experience with GPT/Claude/Gemini APIs','Creative background a plus'],benefits:['$100K–$130K salary','Remote-first','AI tool credits','Creative team culture']},
-  {id:10,featured:false,isNew:false,emoji:'📣',title:'Social Media Designer',company:'Webflow',category:'Marketing',type:'Full-time',location:'Remote',experience:'Junior',salary:'$60K – $80K',salaryNum:70,tags:['Social Design','Canva','Figma','Brand'],posted:'8d ago',applicants:98,desc:"Own Webflow's social visual identity across LinkedIn, X, and Instagram. Create scroll-stopping content that tells the Webflow story.",reqs:['2+ years social/marketing design','Strong portfolio of social assets','Figma proficient','Good understanding of platform best practices'],benefits:['$60K–$80K salary','Remote work','Design tool budget','Great culture']},
-  {id:11,featured:false,isNew:false,emoji:'🎨',title:'Design Systems Lead',company:'Atlassian',category:'Design',type:'Full-time',location:'Remote',experience:'Lead',salary:'$140K – $175K',salaryNum:157,tags:['Design Systems','Tokens','Figma','Documentation'],posted:'10d ago',applicants:41,desc:"Lead and evolve Atlassian's design system — Atlaskit — used by hundreds of engineers and designers across the company.",reqs:['6+ years design with systems focus','Experience leading a design system','Strong documentation skills','Cross-functional collaboration experience'],benefits:['$140K–$175K salary','Remote-first','5 weeks PTO','Strong equity package']},
-  {id:12,featured:false,isNew:false,emoji:'💻',title:'AI Infrastructure Engineer',company:'Hugging Face',category:'AI',type:'Full-time',location:'Remote',experience:'Senior',salary:'$140K – $180K',salaryNum:160,tags:['MLOps','Python','Kubernetes','LLMs'],posted:'9d ago',applicants:65,desc:'Build the infrastructure that democratizes AI. Help millions of developers access state-of-the-art models through the Hugging Face platform.',reqs:['5+ years backend/infrastructure','Python & cloud platforms','Experience with ML workflows','Open source contributions a plus'],benefits:['$140K–$180K salary','Remote globally','Conference budget','Open source time']}
+const FALLBACK_JOBS = [
+  {id:1,featured:true,isNew:true,emoji:'🎨',title:'Senior Brand Designer',company:'Notion',category:'Design',type:'Full-time',location:'Remote',experience:'Senior',salary:'$110K – $140K',tags:['Brand Identity','Figma','Motion','Design Systems'],posted:'2d ago',applicants:48,desc:"Lead Notion's brand evolution across product and marketing.",reqs:['5+ years brand/visual design','Expert in Figma & Illustrator'],benefits:['$110K–$140K salary','Unlimited PTO','Equity']},
+  {id:2,featured:false,isNew:true,emoji:'🤖',title:'AI/ML Product Designer',company:'Anthropic',category:'AI',type:'Full-time',location:'Hybrid',experience:'Senior',salary:'$150K – $190K',tags:['AI UX','Prototyping','Research','LLM interfaces'],posted:'1d ago',applicants:124,desc:'Shape the future of human-AI interaction at Anthropic.',reqs:['Experience designing AI/ML products','Systems thinking'],benefits:['$150K–$190K salary','Learning budget $3K']},
+  {id:3,featured:false,isNew:false,emoji:'📣',title:'Head of Growth Marketing',company:'Linear',category:'Marketing',type:'Full-time',location:'Remote',experience:'Lead',salary:'$130K – $160K',tags:['B2B SaaS','Demand Gen','PLG','Analytics'],posted:'4d ago',applicants:62,desc:"Own Linear's growth strategy.",reqs:['7+ years B2B marketing','Data-driven'],benefits:['$130K–$160K salary','Remote forever']},
+  {id:4,featured:false,isNew:false,emoji:'💻',title:'Frontend Engineer (React)',company:'Vercel',category:'Tech',type:'Full-time',location:'Remote',experience:'Mid',salary:'$120K – $155K',tags:['React','TypeScript','Next.js','CSS'],posted:'3d ago',applicants:201,desc:'Build the developer experience layer.',reqs:['3+ years React/TypeScript','Eye for UI detail'],benefits:['$120K–$155K salary','Remote','Equity']},
+  {id:5,featured:false,isNew:true,emoji:'✍️',title:'Content Strategist',company:'Figma',category:'Content',type:'Full-time',location:'Remote',experience:'Mid',salary:'$90K – $115K',tags:['Content Strategy','SEO','Brand Voice','UX Writing'],posted:'1d ago',applicants:37,desc:"Define and scale Figma's content voice.",reqs:['4+ years content strategy','SEO knowledge'],benefits:['$90K–$115K salary','Learning budget']},
+  {id:6,featured:false,isNew:false,emoji:'📦',title:'Product Manager, AI Features',company:'Loom',category:'Product',type:'Full-time',location:'Remote',experience:'Mid',salary:'$115K – $145K',tags:['AI Product','Video','Growth','Roadmap'],posted:'5d ago',applicants:89,desc:'Lead the AI features roadmap at Loom.',reqs:['3+ years PM','AI product experience'],benefits:['$115K–$145K salary','Equity']},
+  {id:7,featured:false,isNew:false,emoji:'🎬',title:'Motion Designer',company:'Stripe',category:'Video',type:'Contract',location:'Remote',experience:'Mid',salary:'$80/hr',tags:['After Effects','Motion Graphics','Brand','3D'],posted:'6d ago',applicants:54,desc:"Create world-class motion design for Stripe.",reqs:['4+ years motion design','After Effects expert'],benefits:['$80/hr','Flexible schedule']},
+  {id:8,featured:false,isNew:true,emoji:'🎨',title:'UX Designer — Mobile',company:'Spotify',category:'Design',type:'Full-time',location:'Hybrid',experience:'Mid',salary:'$105K – $130K',tags:['Mobile UX','iOS','Android','User Research'],posted:'2d ago',applicants:143,desc:'Design the listening experience for 600M+ users.',reqs:['3+ years mobile UX','iOS & Android patterns'],benefits:['$105K–$130K salary','Music perks']},
+  {id:9,featured:false,isNew:false,emoji:'🤖',title:'Prompt Engineer',company:'Runway',category:'AI',type:'Full-time',location:'Remote',experience:'Mid',salary:'$100K – $130K',tags:['Prompt Engineering','Python','LLMs','Evaluation'],posted:'7d ago',applicants:76,desc:"Optimize prompts for Runway's AI models.",reqs:['Prompt engineering portfolio','Python scripting'],benefits:['$100K–$130K salary','AI tool credits']},
 ];
 
-let activeCategory = 'all', searchQuery = '', visibleCount = 9;
+let ALL_JOBS = [], activeCategory = 'all', searchQuery = '', visibleCount = 9;
 
 function getFiltered() {
   return ALL_JOBS.filter(j => {
-    const matchCat = activeCategory === 'all' || j.category === activeCategory;
+    const matchCat = activeCategory==='all' || j.category===activeCategory;
     const q = searchQuery.toLowerCase();
-    const matchSearch = !q || j.title.toLowerCase().includes(q) || j.company.toLowerCase().includes(q) || j.tags.some(t => t.toLowerCase().includes(q));
-    return matchCat && matchSearch;
+    const matchS = !q || j.title.toLowerCase().includes(q) || j.company.toLowerCase().includes(q) || (j.tags||[]).some(t=>t.toLowerCase().includes(q));
+    return matchCat && matchS;
   });
 }
 
@@ -978,7 +831,7 @@ function renderJobs() {
   const toShow = filtered.slice(0, visibleCount);
   document.getElementById('jobCount').textContent = filtered.length;
   document.getElementById('jobGrid').innerHTML = toShow.map((j,i) => `
-    <div class="job-card${j.featured?' featured':''}" onclick="openModal(${j.id})" style="animation-delay:${i*0.05}s">
+    <div class="job-card${j.featured?' featured':''}" onclick="openModal(${j.id})" style="animation-delay:${i*.05}s">
       ${j.isNew?'<div class="new-badge">New</div>':''}
       <div class="card-top">
         <div class="company-logo">${j.emoji}</div>
@@ -991,50 +844,179 @@ function renderJobs() {
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
         </button>
       </div>
-      <div class="card-tags">${j.tags.map((t,ti)=>`<span class="tag${ti===0?' highlight':''}"> ${t}</span>`).join('')}</div>
+      <div class="card-tags">${(j.tags||[]).map((t,ti)=>`<span class="tag${ti===0?' highlight':''}"> ${t}</span>`).join('')}</div>
       <div class="card-footer">
         <div class="salary">${j.salary} <span>/ year</span></div>
         <div class="card-info">
-          <div class="info-item">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            ${j.posted}
-          </div>
-          <div class="info-item">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            ${j.applicants}
-          </div>
+          <div class="info-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>${j.posted}</div>
+          <div class="info-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>${j.applicants}</div>
         </div>
       </div>
     </div>
   `).join('');
+  setTimeout(initCardTilt, 50);
 }
 
-function filterByCategory(cat, el) {
-  activeCategory = cat; visibleCount = 9;
-  document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
-  renderJobs();
-}
-function filterJobs() { searchQuery = document.getElementById('searchInput').value; visibleCount = 9; renderJobs(); }
-function loadMore() { visibleCount += 6; renderJobs(); }
+function filterByCategory(cat,el) { activeCategory=cat; visibleCount=9; document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active')); el.classList.add('active'); renderJobs(); }
+function filterJobs() { searchQuery=document.getElementById('searchInput').value; visibleCount=9; renderJobs(); }
+function loadMore() { visibleCount+=6; renderJobs(); }
 function toggleFilter(el) { el.classList.toggle('active'); }
 function toggleSave(btn) { btn.classList.toggle('saved'); }
+
 function openModal(id) {
-  const j = JOBS.find(x => x.id === id); if (!j) return;
-  document.getElementById('mCategory').textContent = j.category + ' · ' + j.type;
+  const j = ALL_JOBS.find(x=>x.id===id); if(!j) return;
+  document.getElementById('mCategory').textContent = j.category+' · '+j.type;
   document.getElementById('mTitle').textContent = j.title;
-  document.getElementById('mCompany').textContent = j.company + ' — ' + j.location + ' — ' + j.experience;
-  document.getElementById('mTags').innerHTML = j.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  document.getElementById('mCompany').textContent = j.company+' — '+j.location+' — '+j.experience;
+  document.getElementById('mTags').innerHTML = (j.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
   document.getElementById('mDesc').textContent = j.desc;
-  document.getElementById('mReqs').innerHTML = j.reqs.map(r=>`<li>${r}</li>`).join('');
-  document.getElementById('mBenefits').innerHTML = j.benefits.map(b=>`<li>${b}</li>`).join('');
+  document.getElementById('mReqs').innerHTML = (j.reqs||[]).map(r=>`<li>${r}</li>`).join('');
+  document.getElementById('mBenefits').innerHTML = (j.benefits||[]).map(b=>`<li>${b}</li>`).join('');
   document.getElementById('modal').classList.add('open');
 }
-function closeModal(e) { if (e.target.id==='modal') document.getElementById('modal').classList.remove('open'); }
-document.addEventListener('keydown', e => { if(e.key==='Escape') document.getElementById('modal').classList.remove('open'); });
+function closeModal(e) { if(e.target.id==='modal') document.getElementById('modal').classList.remove('open'); }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.getElementById('modal').classList.remove('open'); });
 
-// ── Init: load from Supabase ─────────────────────────────────
+// ── ANIMATION ENGINE ──────────────────────────────────────
+const cDot = document.getElementById('cDot');
+const cRing = document.getElementById('cRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cDot.style.left=mx+'px'; cDot.style.top=my+'px'; });
+(function animR(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; cRing.style.left=rx+'px'; cRing.style.top=ry+'px'; requestAnimationFrame(animR); })();
+document.querySelectorAll('a,button,.job-card,.cat-pill').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cRing.classList.add('hovered'));
+  el.addEventListener('mouseleave',()=>cRing.classList.remove('hovered'));
+});
+document.addEventListener('mousedown',()=>cRing.classList.add('clicking'));
+document.addEventListener('mouseup',()=>cRing.classList.remove('clicking'));
 
+// Scroll reveal
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('[data-reveal],[data-stagger]').forEach(el=>obs.observe(el));
+
+// Hero words
+setTimeout(()=>{
+  document.querySelectorAll('.hwi').forEach((w,i)=>setTimeout(()=>w.classList.add('in'),80+i*90));
+  ['hero-badge','hero-sub','search-wrap','hero-stats'].forEach((c,i)=>{
+    const el=document.querySelector('.'+c);
+    if(el){ el.style.transition='opacity .6s ease '+(.1+i*.12)+'s'; el.style.opacity='1'; }
+  });
+},100);
+
+// Magnetic buttons
+document.querySelectorAll('.btn-primary,.btn-white').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.25}px,${(e.clientY-r.top-r.height/2)*.25}px)`;
+  });
+  btn.addEventListener('mouseleave',()=>btn.style.transform='');
+});
+
+// Card tilt
+function initCardTilt(){
+  document.querySelectorAll('.job-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`translateY(-3px) rotateY(${x*6}deg) rotateX(${-y*4}deg)`;
+    });
+    card.addEventListener('mouseleave',()=>card.style.transform='');
+  });
+}
+
+// Counter
+const cObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const nums=e.target.querySelectorAll('.stat-num');
+    [[2400,'+'],[840,''],[98,'%'],[85,'K']].forEach(([t,s],i)=>{
+      const el=nums[i]; if(!el) return;
+      const start=performance.now();
+      (function tick(now){
+        const p=Math.min((now-start)/1600,1), ease=1-Math.pow(1-p,4);
+        el.textContent=Math.floor(t*ease).toLocaleString()+s;
+        if(p<1) requestAnimationFrame(tick);
+        else el.textContent=t.toLocaleString()+s;
+      })(start);
+    });
+    cObs.unobserve(e.target);
+  });
+},{threshold:.5});
+const statsEl=document.querySelector('.hero-stats');
+if(statsEl) cObs.observe(statsEl);
+
+// Nav scroll
+window.addEventListener('scroll',()=>document.querySelector('nav').classList.toggle('scrolled',scrollY>20),{passive:true});
+
+
+// ── Load site settings from CMS ──────────────────────────
+async function loadSettings() {
+  try {
+    const res = await fetch('/content/settings.json?t=' + Date.now());
+    if (!res.ok) return;
+    const s = await res.json();
+    // Hero
+    if (s.hero_title) {
+      const h1 = document.querySelector('.hero h1');
+      if (h1) h1.innerHTML = s.hero_title;
+    }
+    if (s.hero_subtitle) {
+      const sub = document.querySelector('.hero-sub');
+      if (sub) sub.textContent = s.hero_subtitle;
+    }
+    if (s.hero_badge) {
+      const badge = document.querySelector('.hero-badge');
+      if (badge) badge.innerHTML = '<span>New</span> ' + s.hero_badge;
+    }
+    // Stats
+    if (s.stats && s.stats.length) {
+      const nums = document.querySelectorAll('.stat-num');
+      const labels = document.querySelectorAll('.stat-label');
+      s.stats.forEach((stat, i) => {
+        if (nums[i]) nums[i].textContent = stat.num;
+        if (labels[i]) labels[i].textContent = stat.label;
+      });
+    }
+    // Banner
+    if (s.banner_title) {
+      const bt = document.querySelector('.banner-text h2');
+      if (bt) bt.textContent = s.banner_title;
+    }
+    if (s.banner_subtitle) {
+      const bs = document.querySelector('.banner-text p');
+      if (bs) bs.textContent = s.banner_subtitle;
+    }
+    if (s.banner_btn) {
+      const bb = document.querySelector('.btn-white');
+      if (bb) bb.textContent = s.banner_btn;
+    }
+  } catch(e) {
+    // settings.json not found, use defaults — no problem
+  }
+}
+loadSettings();
+
+// ── Boot ─────────────────────────────────────────────────────
+(async()=>{
+  showLoading();
+  ALL_JOBS = await fetchJobs();
+  renderJobs();
+})();
+</script>
+
+
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", user => {
+    if (!user) {
+      window.netlifyIdentity.on("login", () => {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
 </script>
 </body>
 </html>
